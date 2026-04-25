@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAILOST Clan</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --red: #ff0000;
+            --dark: #0a0a0a;
+            --card: #151515;
+            --tg: #0088cc;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            font-family: -apple-system, sans-serif;
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        /* Шапка */
+        header {
+            background: var(--dark);
+            border-bottom: 2px solid var(--red);
+            padding: 20px 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { 
+            font-size: 32px; 
+            font-weight: 900; 
+            font-style: italic; 
+            letter-spacing: 4px; 
+            color: white;
+        }
+
+        .tg-btn {
+            display: inline-block;
+            background: var(--tg);
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .container { padding: 20px; }
+
+        h2 {
+            font-size: 12px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: #222;
+            margin-left: 10px;
+        }
+
+        /* Список игроков */
+        .roster {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .player-card {
+            background: var(--card);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid var(--red);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .player-card:active { transform: scale(0.95); background: #1a1a1a; }
+
+        .role { font-size: 10px; color: var(--red); font-weight: bold; text-transform: uppercase; }
+        
+        .nick { 
+            font-size: 16px;
+                      font-weight: bold; 
+            margin-top: 5px; 
+            display: flex; 
+            align-items: center; 
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            margin-left: 6px;
+        }
+
+        /* Модальное окно (Профиль) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 85%;
+            max-width: 350px;
+            background: var(--card);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--red);
+            position: relative;
+        }
+
+        #modalImg {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+            background: #222;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 30px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">TRAILOST</div>
+    <a href="https://t.me/Trailost" class="tg-btn">TELEGRAM КАНАЛ</a>
+</header>
+
+<div class="container">
+    
+    <h2>ОСНОВНОЙ СОСТАВ</h2>
+    <div class="roster">
+        <div class="player-card" onclick="openProfile('p1.jpg', 'Fronixx??')">
+            <div class="role">Основа</div>
+            <div class="nick">Fronixx?? <img src="tiktok.jpg" class="icon"></div>
+        </div>
+        <div class="player-card" onclick="openProfile('p2.jpg', 'Ynchik')">
+            <div class="role">Основа</div>
+            <div class="nick">Ynchik</div>
+        </div>
+        <div class="player-card" onclick="openProfile('p3.jpg', 'Kraters')">
+            <div class="role">Основа</div>
+            <div class="nick">Kraters</div>
+        </div>
+        <div class="player-card" onclick="openProfile('p4.jpg', 'H9izen')">
+            <div class="role">Основа</div>
+            <div class="nick">H9izen</div>
+        </div>
+    </div>
+
+    <h2>ЗАМЕНА</h2>
+    <div class="roster">
+        <div class="player-card" onclick="openProfile('p5.jpg', 's?ka')">
+            <div class="role">Замена</div>
+            <div class="nick">s?ka</div>
+        </div>
+        <div class="player-card" onclick="openProfile('p6.jpg', 'Минон')">
+            <div class="role">Замена</div>
+            <div class="nick">Минон</div>
+        </div>
+        <div class="player-card" onclick="openProfile('p7.jpg', 'Paradox')">
+            <div class="role">Замена</div>
+            <div class="nick">Paradox <img src="check.jpg" class="icon"></div>
+        </div>
+        <div class="player-card" onclick="openProfile('p8.jpg', 'Nixs')">
+            <div class="role">Замена</div>
+            <div class="nick">Nixs</div>
+        </div>
+    </div>
+
+    <h2>РУКОВОДСТВО</h2>
+    <div class="player-card" style="width: 100%; box-sizing: border-box;" onclick="openProfile('p9.jpg', 'Steweie')">
+        <div class="role">Тренер</div>
+        <div class="nick">Steweie</div>
+    </div>
+
+</div>
+
+<div id="modal" class="modal" onclick="closeProfile()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeProfile()">&times;</span>
+        <h3 id="modalName" style="margin: 0; color: var(--red);">Ник</h3>
+        <img id="modalImg" src="" alt="Profile">
+    </div>
+</div>
+
+<script>
+    function openProfile(img, name) {
+        document.getElementById('modalImg').src = img;
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    function closeProfile() {
+        document.getElementById('modal').style.display = 'none';
+    }
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
+</script>
+
+</body>
+</html>
+ 
+).style.display = 'flex';
+    }
+    function closeProfile() {
+        document.getElementById('modal').style.display = 'none';
+    }
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
+</script>
+
+</body>
+</html>
